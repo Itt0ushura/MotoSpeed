@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     {
         _camera = Camera.main;
     }
-    void FixedUpdate()
+    void LateUpdate()
     {
         //CameraFollowRaw();
         //CameraFollowLerpBad();
