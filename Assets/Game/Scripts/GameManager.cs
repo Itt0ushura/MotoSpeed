@@ -7,9 +7,6 @@ public class GameManager : MonoBehaviour
     private JointMotor2D _motor; //var for manipulating with motorSpeed of wheel
     private Camera _camera;
     public float CameraSpeed; // var for t component in Vector3.Lerp
-
-
-    [SerializeField] private Rigidbody2D rb;
     void Start()
     {
         _camera = Camera.main;

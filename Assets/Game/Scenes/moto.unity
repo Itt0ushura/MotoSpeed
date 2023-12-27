@@ -2187,9 +2187,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   motorBike: {fileID: 1949690837}
-  bikeRigidbody: {fileID: 1949690844}
   wheelJoint: {fileID: 1949690843}
   CameraSpeed: 4
+  rb: {fileID: 1949690844}
 --- !u!4 &1646196637
 Transform:
   m_ObjectHideFlags: 0
