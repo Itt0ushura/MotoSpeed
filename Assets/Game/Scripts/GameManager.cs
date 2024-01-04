@@ -1,5 +1,4 @@
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,10 +6,10 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 
-    [SerializeField] private GameObject motorBike; //gameobj of bike to manipulate with it
+    [SerializeField] private GameObject motorBike; //gameobj of bike
 
     [SerializeField] private WheelJoint2D wheelJoint;
-    private JointMotor2D _motor; //var for manipulating with motorSpeed of wheel
+    private JointMotor2D _motor; //var for motorSpeed of wheel
 
     private Camera _camera;
     public float CameraSpeed; // var for t component in Vector3.Lerp
@@ -21,12 +20,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject inGameUI;
 
     [SerializeField] private TextMeshProUGUI speedRPM;
-
     [SerializeField] private TextMeshProUGUI meters;
 
     private Vector3 _distanceStart;
     private Vector3 _distanceEnd;
-    private float _distanceValue;
 
     [Tooltip("Pauses the game"), SerializeField] private Button pauseButton;
     [Tooltip("Restarting the game"), SerializeField] private Button restartButton;
@@ -34,29 +31,30 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        _camera = Camera.main;
         _distanceStart = motorBike.transform.position;
+
         restartButton.onClick.AddListener(RestartGame);
         pauseButton.onClick.AddListener(PauseGame);
         resumeButton.onClick.AddListener(ResumeGame);
-        _camera = Camera.main;
+
         ShowUI();
-    }
-
-    private void Update()
-    {
-
     }
 
     private void FixedUpdate()
     {
+
         Ride();
+
     }
 
     private void LateUpdate()
     {
+
         CameraFollow();
-        DistanceCounter(_distanceValue);
+        DistanceCounter();
         RPMdisplay();
+
     }
 
     private void CameraFollow()
@@ -85,7 +83,6 @@ public class GameManager : MonoBehaviour
             {
 
                 SetSpeed(-1000f);
-                
 
             }
 
@@ -93,6 +90,7 @@ public class GameManager : MonoBehaviour
             {
 
                 SetSpeed(1000f);
+
             }
 
             return;
@@ -111,7 +109,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    //Section for work with UI
+    //Section for UI
     public void ShowUI()
     {
 
@@ -136,14 +134,13 @@ public class GameManager : MonoBehaviour
         gameOverScreen.SetActive(true);
 
     }
-    private void DistanceCounter(float distance)
+    private void DistanceCounter()
     {
 
         _distanceEnd = motorBike.transform.position;
 
-        distance = Vector3.Distance(_distanceStart, _distanceEnd);
-
-        meters.text = Mathf.Round(distance) + " m";
+        float distance = Mathf.Round(Vector3.Distance(_distanceStart, _distanceEnd));
+        meters.text = distance + " m";
     }
 
     private void RestartGame()
@@ -164,6 +161,7 @@ public class GameManager : MonoBehaviour
     }
     private void RPMdisplay()
     {
-        speedRPM.text = Mathf.Abs(Mathf.Round(_motor.motorSpeed)) + " RPM";
+        var rpmSpeed = Mathf.Abs(Mathf.Round(_motor.motorSpeed));
+        speedRPM.text = rpmSpeed + " RPM";
     }
 }
