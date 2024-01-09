@@ -7,9 +7,8 @@ public class GameManager : MonoBehaviour
 {
 
     [SerializeField] private GameObject motorBike; //gameobj of bike
-
-    [SerializeField] private WheelJoint2D wheelJoint;
-    private JointMotor2D _motor; //var for motorSpeed of wheel
+    [SerializeField] private Rigidbody2D wheelRb;
+    public float Speed;
 
     private Camera _camera;
     public float CameraSpeed; // var for t component in Vector3.Lerp
@@ -19,7 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject pauseScreen;
     [SerializeField] private GameObject inGameUI;
 
-    [SerializeField] private TextMeshProUGUI speedRPM;
+    [SerializeField] private TextMeshProUGUI speedKMH;
     [SerializeField] private TextMeshProUGUI meters;
 
     private Vector3 _distanceStart;
@@ -77,35 +76,29 @@ public class GameManager : MonoBehaviour
 
             var input = Input.GetTouch(0).position.x;
             int halfWidth = Screen.width / 2;
-            _motor.maxMotorTorque = 2000;
 
             if (input > halfWidth)
             {
 
-                SetSpeed(-1000f);
+                SetSpeed(Speed);
 
             }
 
             if (input < halfWidth)
             {
-
-                SetSpeed(1000f);
-
+                SetSpeed(-Speed);
             }
 
             return;
 
         }
-
-        SetSpeed(0f);
-
     }
 
     private void SetSpeed(float speed)
     {
 
-        _motor.motorSpeed = Mathf.Lerp(_motor.motorSpeed, speed, Time.fixedDeltaTime);
-        wheelJoint.motor = _motor;
+        wheelRb.AddForce(Vector2.right * speed, ForceMode2D.Force);
+
     }
 
 
@@ -161,7 +154,7 @@ public class GameManager : MonoBehaviour
     }
     private void RPMdisplay()
     {
-        var rpmSpeed = Mathf.Abs(Mathf.Round(_motor.motorSpeed));
-        speedRPM.text = rpmSpeed + " RPM";
+        var kmhSpeed = wheelRb.velocity.x;
+        speedKMH.text = Mathf.Abs(Mathf.Round(kmhSpeed)) + " km/h";
     }
 }

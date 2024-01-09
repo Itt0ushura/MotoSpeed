@@ -390,7 +390,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &29387808
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4009,7 +4009,7 @@ GameObject:
   - component: {fileID: 1501120621}
   - component: {fileID: 1501120620}
   m_Layer: 5
-  m_Name: RPM Text
+  m_Name: KMH Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4180,7 +4180,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1520237301
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4359,12 +4359,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   motorBike: {fileID: 1949690837}
+  wheelRb: {fileID: 1572626314}
+  Speed: 50
   wheelJoint: {fileID: 1949690843}
   CameraSpeed: 4
   gameOverScreen: {fileID: 1199275410}
   pauseScreen: {fileID: 29387807}
   inGameUI: {fileID: 1520237300}
-  speedRPM: {fileID: 1501120620}
+  speedKMH: {fileID: 1501120620}
   meters: {fileID: 1286713042}
   pauseButton: {fileID: 403852437}
   restartButton: {fileID: 1320081952}
@@ -5085,7 +5087,7 @@ WheelJoint2D:
     m_DampingRatio: 0.7
     m_Frequency: 6
     m_Angle: 90
-  m_UseMotor: 1
+  m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
     m_MaximumMotorForce: 10000
