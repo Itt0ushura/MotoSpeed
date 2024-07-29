@@ -86,7 +86,9 @@ public class GameManager : MonoBehaviour
 
             if (input < halfWidth)
             {
+
                 SetSpeed(-Speed);
+
             }
 
             return;
